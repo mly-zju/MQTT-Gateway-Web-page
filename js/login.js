@@ -91,4 +91,8 @@ $(document).ready(function(){
 		timeout=window.requestAnimFrame(myLoop);
 	}
 	myLoop();
+	$(window).resize(function(){
+		fruit.init();
+		myLoop();
+	})
 });
