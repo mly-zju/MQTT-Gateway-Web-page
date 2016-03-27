@@ -1,6 +1,8 @@
 *{ margin:0; padding:0; }
 body,html{ height:100%; }
-.wrapper{ background-color:rgb(81,111,141); width:100%; min-width:1000px; height:100%; }
+.wrapper-data,.wrapper-index{ background-color:rgb(81,111,141); width:100%; min-width:1000px; }
+.wrapper-data{ height:auto; }
+.wrapper-index{ height:100%; }
 .logo{ width:1000px; height:110px; background:url(../img/logo.jpg); background-size:cover; margin:0 auto; }
 .body{ width:1000px; margin:0 auto; padding:20px 0; background-color:white; }
 .config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px;}

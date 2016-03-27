@@ -8,7 +8,7 @@
 	<link rel='stylesheet' type='text/css' href='css/main.css'/>
 </head>
 <body>
-	<div class='wrapper'>
+	<div class='wrapper-data'>
 		<div class='logo'>
 		</div>
 		<div class='body'>
@@ -30,15 +30,15 @@
 <script>
 	$(document).ready(function() {
 	   var title = {
-	       text: '一天内平均气温'   
+	       text: 'wanglab/temperature'   
 	   };
 	   var xAxis = {
-	       categories: ['一月', '二月', '三月', '四月', '五月', '六月'
-	              ,'七月', '八月', '九月', '十月', '十一月', '十二月']
+	       categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'
+	              ,'06:00', '07:00', '08:00', '09:00', '10:00', '11:00']
 	   };
 	   var yAxis = {
 	      title: {
-	         text: 'Temperature (\xB0C)'
+	         text: '温度'
 	      },
 	      plotLines: [{
 	         value: 0,
@@ -60,7 +60,7 @@
 
 	   var series =  [
 	      {
-	         name: 'Tokyo',
+	         name: 'air-condition',
 	         data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2,
 	            26.5, 23.3, 18.3, 13.9, 9.6]
 	      }
