@@ -11,10 +11,11 @@ body,html{ height:100%; }
 .config td input{ border:none; line-height:20px; padding:0 10px; font-size:16px; width:130px; }
 .config tr td{ background-color:white; text-align:center; border:1px solid black; }
 .config tr button{ background-color:rgb(64,119,164); color:white; border:none; padding:2px 8px; margin-bottom:3px; }
+.check-button a{ text-decoration:none; color:white; }
 .footer{ border-top:1px solid gray; width:1000px; margin:0 auto; padding:15px 0; text-align:center; background-color:white; font-size:12px; }
 
 .nav{ width:800px; height:30px; margin:0 auto; list-style:none; }
 .nav li{ float:left; background-color:rgb(81,111,141); }
-.nav li a{ display:block; height:20px; line-height:20px; width:60px; font-size:14px; text-decoration:none; color:white; text-align:center; font-family:'微软雅黑'; 
+.nav li a{ display:block; height:20px; line-height:20px; width:60px; font-size:14px; text-decoration:none; color:white; text-align:center; font-family:'微软雅黑';
 			border-right:1px solid white; }
 .nav li.mine-display{ background-color:red; }
