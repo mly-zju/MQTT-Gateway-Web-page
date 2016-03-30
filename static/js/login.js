@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var delta=0;
 	var timeout;
 	var bgPic=new Image();
-	bgPic.src='img/background.jpg';
+	bgPic.src='static/img/background.jpg';
 	canvas.height=canHeight;
 	canvas.width=canWidth;
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
 				this.y[i]=Math.random()*canHeight;
 				this.alive[i]=true;
 				this.img[i]=new Image();
-				this.img[i].src='img/dust'+i%3+'.png';
+				this.img[i].src='static/img/dust'+i%3+'.png';
 				this.speed[i]=Math.random()*0.15+0.07;
 				this.direction[i]=i%3;
 				this.delay[i]=Math.random()*5000;
