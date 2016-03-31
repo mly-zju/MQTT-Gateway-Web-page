@@ -41,6 +41,20 @@ $def with (deviceInfo)
 			Copyright | 2015 上海交通大学无线通信网络实验室<br/>
 			地址：上海市闵行区东川路800号密西根学院  邮编：200240
 		</div>
+
+		<div class='config-layer'>
+			<div class='config-wrapper'>
+				<form action='/index' method='POST' class='config-form'>
+					<label>设备名称:</label><input type='text' name='deviceName' class='config-input'/><br/>
+					<label>地址:</label><input type='text' disabled='disabled' class='config-input'/><br/>
+					<label>主题:</label><input type='text' name='topic' class='config-input'/><br/>
+					<label>数据单位(x轴):</label><input type='text' name='xscale' class='config-input'/><br/>
+					<label>数据单位(y轴):</label><input type='text' name='yscale' class='config-input'/><br/>
+					<input type='submit' value='确定' class='config-yes'/>
+				</form>
+			</div>
+		</div>
+
 	</div>
 	<script src='static/js/main.js' type='text/javascript'></script>
 </body>
