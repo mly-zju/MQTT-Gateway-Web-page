@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 import web
+from fileHandler import fileReader
+import json
 
 urls=(
     '/','loginHandler',
@@ -6,6 +9,9 @@ urls=(
     '/check','checkHandler'
 )
 render = web.template.render('templates/')
+
+deviceFile=fileReader('deviceInfo.txt')
+deviceDataFile=fileReader('deviceData.txt')
 
 class loginHandler:
     def GET(self):
@@ -22,14 +28,16 @@ class loginHandler:
 
 class indexHandler:
     def GET(self):
-        return render.index()
+        deviceInfo=deviceFile.read()
+        return render.index(deviceInfo)
 
 class checkHandler:
     def GET(self):
         tmp=web.input()
-        deviceId=tmp.get('deviceId')
-        print deviceId
-        return render.data()
+        deviceId=int(tmp.get('deviceId'))
+        deviceInfo=json.dumps(deviceFile.read()[deviceId])
+        deviceData=json.dumps(deviceDataFile.readData(deviceId))
+        return render.data(deviceInfo,deviceData)
 
 if __name__=='__main__':
     app=web.application(urls,globals())

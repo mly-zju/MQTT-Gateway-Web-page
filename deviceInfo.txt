@@ -1,0 +1,1 @@
+[{"topic": "hhh", "deviceName": "test", "scale": "tem/hour", "deviceId": 0, "deviceIp": "192.168.2.1"}]

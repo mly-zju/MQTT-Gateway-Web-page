@@ -1,0 +1,1 @@
+[{"deviceName": "air-condition", "deviceIp": "192.168.2.1"}]

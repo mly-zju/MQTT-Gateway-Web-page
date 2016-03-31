@@ -1,3 +1,5 @@
+$def with (deviceInfo,deviceData)
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +14,22 @@
 		<div class='logo'>
 		</div>
 		<div class='body'>
-			<ul class='nav'>
+			<!-- <ul class='nav'>
 				<li class='day mine-display' data-taggle='0'><a href='#'>一天</a></li>
 				<li class='week' data-taggle='1'><a href='#'>一周</a></li>
 				<li class='month' data-taggle='2'><a href='#'>一月</a></li>
-			</ul>
-			<div  class='container' id="container1" style="width: 800px; height: 450px; margin: 0 auto;"></div>
-			<div class='container' id="container2" style="width: 800px; height: 450px; margin: 0 auto; display:none; "></div>
-			<div class='container' id="container3" style="width: 800px; height: 450px; margin: 0 auto; display:none; "></div>
+			</ul> -->
+			<div  class='container' id="container1" style="width: 800px; height: 440px; margin: 0 auto;"></div>
+			<!-- <div class='container' id="container2" style="width: 800px; height: 440px; margin: 0 auto; display:none; "></div>
+			<div class='container' id="container3" style="width: 800px; height: 440px; margin: 0 auto; display:none; "></div> -->
 		</div>
 		<div class='footer'>
 			Copyright | 2015 上海交通大学无线通信网络实验室<br/>
 			地址：上海市闵行区东川路800号密西根学院  邮编：200240
 		</div>
 	</div>
+	<input type='hidden' value='$deviceInfo' id='deviceInfo'/>
+	<input type='hidden' value='$deviceData' id='deviceData'/>
 	<script src='static/js/main.js' type='text/javascript'></script>
 	<script src='static/js/data.js' type='text/javascript'></script>
 </body>

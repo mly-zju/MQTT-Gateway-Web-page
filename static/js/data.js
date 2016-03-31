@@ -1,14 +1,19 @@
 $(document).ready(function() {
+  var deviceInfo=JSON.parse($('#deviceInfo').val());
+  var deviceData=JSON.parse($('#deviceData').val());
+  deviceData.shift();
+
    var title = {
-       text: 'wanglab/temperature'
+       text: deviceInfo.topic
    };
    var xAxis = {
-       categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'
-              ,'06:00', '07:00', '08:00', '09:00', '10:00', '11:00']
+      //  categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'
+      //         ,'06:00', '07:00', '08:00', '09:00', '10:00', '11:00']
+      categories: ['00:00','01:00','02:00']
    };
    var yAxis = {
       title: {
-         text: '温度'
+         text: deviceInfo.scale.split('/')[0]
       },
       plotLines: [{
          value: 0,
@@ -30,9 +35,10 @@ $(document).ready(function() {
 
    var series =  [
       {
-         name: 'air-condition',
-         data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2,
-            26.5, 23.3, 18.3, 13.9, 9.6]
+         name: deviceInfo.diveceName,
+        //  data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2,
+        //     26.5, 23.3, 18.3, 13.9, 9.6]
+        data: deviceData
       }
    ];
 
