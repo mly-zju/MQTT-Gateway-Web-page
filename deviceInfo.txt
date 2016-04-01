@@ -1,1 +1,1 @@
-[{"topic": "wanglab/temperature/room407/mly/computer", "deviceName": "air-condition", "scale": "\u6444\u6c0f\u5ea6/\u5c0f\u65f6", "deviceId": 0, "deviceIp": "192.168.2.1"}]
+[{"topic": "", "deviceName": "", "scale": " /", "deviceId": 0, "deviceIp": "192.168.0.2"}, {"topic": " ", "deviceName": "", "scale": "/", "deviceId": 1, "deviceIp": "192.168.0.3"}]
