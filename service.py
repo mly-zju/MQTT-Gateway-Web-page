@@ -31,6 +31,21 @@ class indexHandler:
         deviceInfo=deviceFile.read()
         return render.index(deviceInfo)
 
+    def POST(self):
+        info=web.input()
+        deviceId=int(info.get('deviceId'));
+        deviceName=info.get('deviceName');
+        topic=info.get('topic');
+        xscale=info.get('xscale');
+        yscale=info.get('yscale');
+        scale=yscale+'/'+xscale;
+        deviceInfo=deviceFile.read();
+        deviceInfo[deviceId]['deviceName']=deviceName;
+        deviceInfo[deviceId]['topic']=topic;
+        deviceInfo[deviceId]['scale']=scale;
+        deviceFile.write(deviceInfo);
+        return render.index(deviceInfo);
+
 class checkHandler:
     def GET(self):
         tmp=web.input()

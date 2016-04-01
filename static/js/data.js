@@ -35,9 +35,7 @@ $(document).ready(function() {
 
    var series =  [
       {
-         name: deviceInfo.diveceName,
-        //  data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2,
-        //     26.5, 23.3, 18.3, 13.9, 9.6]
+         name: deviceInfo.deviceName,
         data: deviceData
       }
    ];
@@ -53,42 +51,5 @@ $(document).ready(function() {
    json1.legend = legend;
    json1.series = series;
 
-   var title2={
-       text: '一周内平均气温'
-   };
-   json2.title = title2;
-   json2.xAxis = xAxis;
-   json2.yAxis = yAxis;
-   json2.tooltip = tooltip;
-   json2.legend = legend;
-   json2.series = series;
-
-   var title3={
-       text: '一月内平均气温'
-   };
-   json3.title = title3;
-   json3.xAxis = xAxis;
-   json3.yAxis = yAxis;
-   json3.tooltip = tooltip;
-   json3.legend = legend;
-   json3.series = series;
-
    $('#container1').highcharts(json1);
-   $('#container2').highcharts(json2);
-   $('#container3').highcharts(json3);
-   var ul=$('.nav');
-   var lis=$('.nav li');
-   var as=$('.nav li a');
-   var containers=$('.container');
-   ul.on('click','li',function(e){
-       lis.removeClass('mine-display');
-       $(this).addClass('mine-display');
-       containers.css('display','none');
-       var index;
-       for(var i=0;i<as.length;i++){
-           if(as.eq(i)[0]==e.target)
-              index=i;
-       }
-       containers.eq(index).css('display','block');
-   });
 });

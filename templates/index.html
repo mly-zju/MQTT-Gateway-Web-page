@@ -28,7 +28,7 @@ $def with (deviceInfo)
 						<td>$item['topic']</td>
 						<td>$item['scale']</td>
 						<td>
-						<button class='del-button'>配置</button>
+						<button class='config-button'>配置</button>
 							</td>
 							<td>
 						<button class='check-button'><a href='/check?deviceId=$item["deviceId"]'>查看</a></button>
@@ -51,6 +51,7 @@ $def with (deviceInfo)
 					<label>数据单位(x轴):</label><input type='text' name='xscale' class='config-input'/><br/>
 					<label>数据单位(y轴):</label><input type='text' name='yscale' class='config-input'/><br/>
 					<input type='submit' value='确定' class='config-yes'/>
+					<input type='hidden' name='deviceId' class='config-id'/>
 				</form>
 			</div>
 		</div>

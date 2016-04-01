@@ -5,11 +5,10 @@ body,html{ height:100%; }
 .wrapper-index{ height:100%; }
 .logo{ width:1000px; height:110px; background:url(../img/logo.jpg); background-size:cover; margin:0 auto; }
 .body{ width:1000px; margin:0 auto; padding:20px 0; background-color:white; }
-.config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px;}
+.config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px; table-layout:fixed; width:940px;}
 .config th{ width:150px; height:20px; line-height:20px; padding:2px 0; background-color:rgb(29,87,129); color:white; border:1px solid black; }
 .config th.config-operate{ width:200px; }
-.config td input{ border:none; line-height:20px; padding:0 10px; font-size:16px; width:130px; }
-.config tr td{ background-color:white; text-align:center; border:1px solid black; }
+.config tr td{ background-color:white; text-align:center; border:1px solid black;overflow:hidden;}
 .config tr button{ background-color:rgb(64,119,164); color:white; border:none; padding:2px 8px; margin-bottom:3px; }
 .check-button a{ text-decoration:none; color:white; }
 .footer{ border-top:1px solid gray; width:1000px; margin:0 auto; padding:15px 0; text-align:center; background-color:white; font-size:12px; }
