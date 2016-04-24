@@ -21,10 +21,29 @@ class fileReader:
 
     def readData(self,lineNum):
         with open(self.path,'r') as f:
-            tmp=f.readlines()
-            tmp2=tmp[lineNum].strip()
-            self.content=json.loads(tmp2)
+            lineContents=f.readlines()
+            line=lineContents[lineNum].strip()
+            self.content=json.loads(line)
         return self.content
+
+    def writeData(self,data,lineNum):
+        with open(self.path,'r') as f:
+            lineContents=f.readlines()
+            line=self.readData(lineNum)
+            line.append(data)
+            lineContents[lineNum]=json.dumps(line)+'\n'
+            tmp=''
+            for ele in lineContents:
+                tmp+=ele
+        with open(self.path,'w') as f:
+            f.write(tmp)
+
+    def addData(self,data):
+        with open(self.path,'a+') as f:
+            tmp=json.dumps(data)+'\n'
+            f.write(tmp)
+
+
 
 
 if __name__=='__main__':
@@ -32,4 +51,6 @@ if __name__=='__main__':
     # File.write([{'deviceId':3,'deviceName':'test','deviceIp':'192.168.2.1','topic':'hhh','scale':'tem/hour'}])
     # File.read()
     File=fileReader('deviceData.txt')
-    File.readData(1)
+    File.writeData(9999,1)
+    myData=['192.168.100.100',888,888,888,888]
+    File.addData(myData)
