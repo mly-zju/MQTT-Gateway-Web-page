@@ -5,6 +5,7 @@ import json
 import urllib2
 from sgmllib import SGMLParser
 import os
+from datetime import datetime
 
 class ListName(SGMLParser):
 	def __init__(self):
@@ -22,6 +23,7 @@ class ListName(SGMLParser):
 nameReq=ListName()
 deviceFile=fileReader('deviceInfo.txt')
 deviceDataFile=fileReader('deviceData.txt')
+now=datetime.now()
 
 def tcplink(sock,addr):
     print 'accept new connection from ',addr
@@ -53,8 +55,19 @@ def tcplink(sock,addr):
         dataLine.append(int(data))
         deviceDataFile.addData(dataLine)
     else:
-        deviceDataFile.writeData(int(data),deviceId)
-        print deviceId
+		topic=deviceInfo[deviceId]['topic']
+		scale=deviceInfo[deviceId]['scale']
+		scaleX=scale[scale.index('/')+1:]
+		if scaleX!='' and topic!='':
+			deviceDataFile.writeDataLimit(int(data),deviceId, scaleX)
+			#更新最新时间
+			if scaleX=='day':
+				deviceInfo[deviceId]['currentTime']=now.weekday()+1
+			elif scaleX=='hour':
+				deviceInfo[deviceId]['currentTime']=now.hour
+			deviceFile.write(deviceInfo)
+		else:
+			deviceDataFile.writeData(int(data),deviceId)
     sock.close()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

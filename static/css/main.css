@@ -5,12 +5,12 @@ body,html{ height:100%; }
 .wrapper-index{ height:100%; }
 .logo{ width:1000px; height:110px; background:url(../img/logo.jpg); background-size:cover; margin:0 auto; }
 .body{ width:1000px; margin:0 auto; padding:20px 0; background-color:white; }
-.config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px; table-layout:fixed; width:940px;}
-.config th{ width:150px; height:20px; line-height:20px; padding:2px 0; background-color:rgb(29,87,129); color:white; border:1px solid black; }
+.self-config{border:none;background-color:rgb(64,119,164);color:white;padding:2px 8px;margin-bottom:10px;float:right;margin-right:25px;width:100px;height:30px;}
+.config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px; table-layout:fixed; width:960px;}
+.config th{ width:150px; line-height:20px; padding:2px 0; background-color:rgb(29,87,129); color:white; border:1px solid black; }
 .config th.config-operate{ width:200px; }
-.config tr td{ background-color:white; text-align:center; border:1px solid black;overflow:hidden; text-overflow:clip;}
+.config tr td{ background-color:white; text-align:center; border:1px solid black;overflow:hidden;word-wrap:break-word;}
 .config tr button{ background-color:rgb(64,119,164); color:white; border:none; padding:2px 8px; margin-bottom:3px; }
-.check-button a{ text-decoration:none; color:white; display:block; }
 .footer{ border-top:1px solid gray; width:1000px; margin:0 auto; padding:15px 0; text-align:center; background-color:white; font-size:12px; }
 
 .nav{ width:800px; height:30px; margin:0 auto; list-style:none; }
@@ -19,8 +19,11 @@ body,html{ height:100%; }
 			border-right:1px solid white; }
 .nav li.mine-display{ background-color:red; }
 
-.config-layer{ display:none;position:fixed;z-index:2;left:0;right:0;top:0;bottom:0;background-color:gray;opacity:0.98;}
-.config-wrapper{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;width:300px;height:380px;text-align:center;background-color:white; padding:10px; border-radius:8px;}
+.config-layer,.self-config-layer{ display:none;position:fixed;z-index:2;left:0;right:0;top:0;bottom:0;background-color:gray;opacity:0.98;}
+.config-wrapper,.self-config-wrapper{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;width:300px;height:380px;text-align:center;background-color:white; padding:10px; border-radius:8px;}
 .config-wrapper label{display:inline-block;width:100px;margin-bottom:5px;}
 .config-wrapper input{width:190px;margin-bottom:5px;padding:0 10px; font-size:16px;}
+.config-wrapper select{width:100px;font-size:16px;text-align:center; margin-bottom:5px; padding:0 10px;}
 .config-wrapper .config-yes{width:80px;margin-top:10px; background-color:rgb(81,111,141); color:white; border:none;}
+
+.self-config-add,.self-config-yes{margin:10px auto;background-color:rgb(81,111,141); color:white; border:none;padding:2px 8px;}

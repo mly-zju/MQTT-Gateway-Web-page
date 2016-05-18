@@ -48,7 +48,6 @@ class fileReader:
             limit=24
         elif xScale=='day':
             limit=7
-        print limit
         with open(self.path,'r') as f:
             lineContents=f.readlines()
             line=self.readData(lineNum)

@@ -12,10 +12,12 @@ $def with (deviceInfo)
 		<div class='logo'>
 		</div>
 		<div class='body'>
+			<button class='self-config'>自动配置</button>
 			<table class='config'>
 				<tr>
 					<th>设备名称</th>
 					<th>地址</th>
+					<th>厂商</th>
 					<th>主题</th>
 					<th>数据单位</th>
 					<th class='config-operate' colspan='2'>操作</th>
@@ -24,14 +26,15 @@ $def with (deviceInfo)
 				$for item in deviceInfo:
 					<tr>
 						<td>$item['deviceName']</td>
-						<td>$item['deviceIp']</td>
+						<td>$item['deviceIp']/$item['deviceMac']</td>
+						<td>$item['deviceManufac']</td>
 						<td>$item['topic']</td>
 						<td>$item['scale']</td>
 						<td>
 						<button class='config-button'>配置</button>
 							</td>
 							<td>
-						<button class='check-button'><a href='/check?deviceId=$item["deviceId"]'>查看</a></button>
+						<button class='check-button' data-checkid=$item["deviceId"]>查看</button>
 							</td>
 					</tr>
 
@@ -47,12 +50,23 @@ $def with (deviceInfo)
 				<form action='/index' method='POST' class='config-form'>
 					<label>设备名称:</label><input type='text' name='deviceName' class='config-input'/><br/>
 					<label>地址:</label><input type='text' disabled='disabled' class='config-input'/><br/>
+					<label>厂商:</label><input type='text' disabled='disalbed' class='config-input'/><br/>
 					<label>主题:</label><input type='text' name='topic' class='config-input'/><br/>
-					<label>数据单位(x轴):</label><input type='text' name='xscale' class='config-input'/><br/>
+					<label>数据单位(x轴):</label><br/><select name='xscale' class='config-input'>
+						<option value='day'>day</option>
+						<option value='hour'>hour</option>
+					</select><br/>
 					<label>数据单位(y轴):</label><input type='text' name='yscale' class='config-input'/><br/>
 					<input type='submit' value='确定' class='config-yes'/>
 					<input type='hidden' name='deviceId' class='config-id'/>
 				</form>
+			</div>
+		</div>
+
+	  <div class='self-config-layer'>
+			<div class='self-config-wrapper'>
+				<button class='self-config-add'>增加规则</button><br/>
+				<button class='self-config-yes'>确定</button>
 			</div>
 		</div>
 
