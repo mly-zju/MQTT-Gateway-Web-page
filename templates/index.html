@@ -66,6 +66,22 @@ $def with (deviceInfo)
 	  <div class='self-config-layer'>
 			<div class='self-config-wrapper'>
 				<button class='self-config-add'>增加规则</button><br/>
+				<div class='self-config-rule'>
+					<label>厂商分类:</label>
+					<select class='rule-manu'>
+						<option value='manu1'>Cisco</option>
+					</select><br/>
+					<label>IP范围:</label>
+					<input class='rule-ip-begin'/>~<input class='rule-ip-end'/><br/>
+					<label>主题:</label>
+					<input class='rule-topic'/>
+					<label>后缀:</label>
+					<select class='rule-extension'>
+						<option value='extension1'>无后缀</option>
+						<option value='extension2'>按照设备索引</option>
+						<option value='extension3'>按照IP地址</option>
+					</select>
+				</div>
 				<button class='self-config-yes'>确定</button>
 			</div>
 		</div>

@@ -5,6 +5,9 @@ $(document).ready(function() {
   var configItems = configLayer.find('.config-input');
   var deviceId = configLayer.find('.config-id').eq(0);
   var selfConfigLayer = $('.self-config-layer').eq(0);
+  var selfConfigYes = $('.self-config-yes').eq(0);
+  var selfConfigRule = $('.self-config-rule');
+
   table.on('click', '.config-button', function(e) {
     var tmp = $(this).closest('tr');
     var items = tmp.find('td');
@@ -39,4 +42,21 @@ $(document).ready(function() {
       selfConfigLayer.css('display', 'none');
     }
   });
+  selfConfigYes.click(function() {
+    var ruleManu = [];
+    var ruleIpBegin = [];
+    var ruleIpEnd = [];
+    var ruleTopic = [];
+    var ruleExt = [];
+    selfConfigRule.each(function(index, ele) {
+      var t = $(this);
+      ruleManu.push(t.find('.rule-manu option:selected').text());
+      ruleIpBegin.push(t.find('.rule-ip-begin').val());
+      ruleIpEnd.push(t.find('.rule-ip-end').val());
+      ruleTopic.push(t.find('.rule-topic').val());
+      ruleExt.push(t.find('.rule-extension option:selected').text());
+    });
+    console.log(ruleIpBegin.length);
+  });
+
 });
