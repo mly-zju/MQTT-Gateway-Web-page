@@ -26,9 +26,9 @@ $def with (deviceInfo)
 				$for item in deviceInfo:
 					<tr>
 						<td>$item['deviceName']</td>
-						<td>$item['deviceIp']/$item['deviceMac']</td>
-						<td>$item['deviceManufac']</td>
-						<td>$item['topic']</td>
+						<td class='info-addr'>$item['deviceIp']/$item['deviceMac']</td>
+						<td class='info-manu'>$item['deviceManufac']</td>
+						<td class='info-topic'>$item['topic']</td>
 						<td>$item['scale']</td>
 						<td>
 						<button class='config-button'>配置</button>
@@ -57,7 +57,8 @@ $def with (deviceInfo)
 						<option value='hour'>hour</option>
 					</select><br/>
 					<label>数据单位(y轴):</label><input type='text' name='yscale' class='config-input'/><br/>
-					<input type='submit' value='确定' class='config-yes'/>
+					<input type='button' value='确定' class='config-yes'/>
+					<input type='button' value='取消' class='config-no'/>
 					<input type='hidden' name='deviceId' class='config-id'/>
 				</form>
 			</div>
@@ -65,11 +66,13 @@ $def with (deviceInfo)
 
 	  <div class='self-config-layer'>
 			<div class='self-config-wrapper'>
-				<button class='self-config-add'>增加规则</button><br/>
+				<button class='self-config-add'>增加规则</button>
 				<div class='self-config-rule'>
+					<button class='rule-del'>&times;</button>
 					<label>厂商分类:</label>
 					<select class='rule-manu'>
-						<option value='manu1'>Cisco</option>
+						<option>不限厂商</option>
+						<option>Cisco</option>
 					</select><br/>
 					<label>IP范围:</label>
 					<input class='rule-ip-begin'/>~<input class='rule-ip-end'/><br/>
@@ -77,12 +80,19 @@ $def with (deviceInfo)
 					<input class='rule-topic'/>
 					<label>后缀:</label>
 					<select class='rule-extension'>
-						<option value='extension1'>无后缀</option>
-						<option value='extension2'>按照设备索引</option>
-						<option value='extension3'>按照IP地址</option>
-					</select>
+						<option>无后缀</option>
+						<option>按照设备索引</option>
+					</select><br/>
+					<label>单位(X轴):</label>
+					<select class='rule-scalex'>
+						<option>day</option>
+						<option>hour</option>
+					</select><br/>
+					<label>单位(Y轴):</label>
+					<input class='rule-scaley'/><br/>
 				</div>
 				<button class='self-config-yes'>确定</button>
+				<button class='self-config-no'>取消</button>
 			</div>
 		</div>
 
