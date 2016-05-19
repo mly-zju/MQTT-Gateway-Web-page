@@ -5,6 +5,7 @@ body,html{ height:100%; }
 .wrapper-index{ height:100%; }
 .logo{ width:1000px; height:110px; background:url(../img/logo.jpg); background-size:cover; margin:0 auto; }
 .body{ width:1000px; margin:0 auto; padding:20px 0; background-color:white; }
+.logout{border:none;background-color:rgb(64,119,164);color:white;padding:2px 8px;margin-bottom:10px;float:left;margin-left:25px;width:100px;height:30px;}
 .self-config{border:none;background-color:rgb(64,119,164);color:white;padding:2px 8px;margin-bottom:10px;float:right;margin-right:25px;width:100px;height:30px;}
 .config{ margin:0 auto; border-collapse:collapse; font-family:'微软雅黑'; font-size:18px; table-layout:fixed; width:960px;}
 .config th{ width:150px; line-height:20px; padding:2px 0; background-color:rgb(29,87,129); color:white; border:1px solid black; }
@@ -35,3 +36,5 @@ body,html{ height:100%; }
 .self-config-rule .rule-topic,.self-config-rule .rule-scaley{width:243px;margin-bottom:5px;font-size:16px;}
 .self-config-rule select{width:150px;margin-bottom:5px;font-size:16px;}
 .self-config-yes,.self-config-no{float:left;margin:10px 0 10px 100px;background-color:rgb(81,111,141); color:white; border:none;padding:2px 8px;}
+
+.data-back{border:none;background-color:rgb(64,119,164);color:white;padding:2px 8px;margin-bottom:10px;margin-left:25px;width:100px;height:30px;}

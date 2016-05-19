@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  var logout = $('.logout').eq(0);
   var table = $('.config').eq(0);
   var selfOn = $('.self-config').eq(0);
   var configLayer = $('.config-layer').eq(0);
@@ -11,6 +12,11 @@ $(document).ready(function() {
   var selfConfigNo = $('.self-config-no').eq(0);
   var selfConfigDel = $('.rule-del');
   var selfConfigAdd = $('.self-config-add');
+
+  logout.click(function() {
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    window.location.reload();
+  });
 
   table.on('click', '.config-button', function(e) {
     var tmp = $(this).closest('tr');
@@ -60,6 +66,7 @@ $(document).ready(function() {
     var ruleIpEnd = [];
     var ruleTopic = [];
     var ruleExt = [];
+    var ruleScale = [];
     selfConfigRule.each(function(index, ele) {
       var t = $(this);
       ruleManu.push(t.find('.rule-manu option:selected').text());
@@ -67,10 +74,12 @@ $(document).ready(function() {
       ruleIpEnd.push(t.find('.rule-ip-end').val());
       ruleTopic.push(t.find('.rule-topic').val());
       ruleExt.push(t.find('.rule-extension option:selected').text());
+      ruleScale.push(t.find('.rule-scaley').val() + '/' + t.find('.rule-scalex option:selected').text());
     });
     var infoManu = $('.info-manu');
     var infoAddr = $('.info-addr');
     var infoTopic = $('.info-topic');
+    var infoScale = $('.info-scale');
     var deviceNum = infoManu.length;
     var jsonData = [];
     for (var i = 0; i < selfConfigRule.length; i++) {
@@ -88,15 +97,19 @@ $(document).ready(function() {
             if (addr >= Number(begin) && addr <= Number(end)) {
               if (ruleExt[i] == '无后缀') {
                 infoTopic.eq(j).text(ruleTopic[i]);
+                infoScale.eq(j).text(ruleScale[i]);
                 jsonData.push({
                   deviceId: j,
-                  topic: ruleTopic[i]
+                  topic: ruleTopic[i],
+                  scale: ruleScale[i]
                 });
               } else if (ruleExt[i] == '按照设备索引') {
                 infoTopic.eq(j).text(ruleTopic[i] + '(' + deviceIndex + ')');
+                infoScale.eq(j).text(ruleScale[i]);
                 jsonData.push({
                   deviceId: j,
-                  topic: ruleTopic[i] + '(' + deviceIndex + ')'
+                  topic: ruleTopic[i] + '(' + deviceIndex + ')',
+                  scale: ruleScale[i]
                 });
                 deviceIndex++;
               }
@@ -104,15 +117,19 @@ $(document).ready(function() {
           } else if (begin == '' && end == '') {
             if (ruleExt[i] == '无后缀') {
               infoTopic.eq(j).text(ruleTopic[i]);
+              infoScale.eq(j).text(ruleScale[i]);
               jsonData.push({
                 deviceId: j,
-                topic: ruleTopic[i]
+                topic: ruleTopic[i],
+                scale: ruleScale[i]
               });
             } else if (ruleExt[i] == '按照设备索引') {
               infoTopic.eq(j).text(ruleTopic[i] + '(' + deviceIndex + ')');
+              infoScale.eq(j).text(ruleScale[i]);
               jsonData.push({
                 deviceId: j,
-                topic: ruleTopic[i] + '(' + deviceIndex + ')'
+                topic: ruleTopic[i] + '(' + deviceIndex + ')',
+                scale: ruleScale[i]
               });
               deviceIndex++;
             }
@@ -172,16 +189,4 @@ $(document).ready(function() {
     "
     selfConfigYes.before(myhtml);
   })
-
-
-
-
-
-
-
-
-
-
-
-
 });
