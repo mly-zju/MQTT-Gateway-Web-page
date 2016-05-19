@@ -6,6 +6,7 @@ import urllib2
 from sgmllib import SGMLParser
 import os
 from datetime import datetime
+import paho.mqtt.client as mqtt
 
 class ListName(SGMLParser):
 	def __init__(self):
@@ -24,11 +25,12 @@ nameReq=ListName()
 deviceFile=fileReader('deviceInfo.txt')
 deviceDataFile=fileReader('deviceData.txt')
 now=datetime.now()
+mqttClient=mqtt.Client()
+mqttClient.connect('127.0.0.1')
 
 def tcplink(sock,addr):
     print 'accept new connection from ',addr
     data=sock.recv(1024)
-    print data
     flag=False
     deviceInfo=deviceFile.read()
     deviceId=0;
@@ -59,10 +61,16 @@ def tcplink(sock,addr):
 		scale=deviceInfo[deviceId]['scale']
 		scaleX=scale[scale.index('/')+1:]
 		if scaleX!='' and topic!='':
+			if scaleX=='day':
+				cacheLimit=7
+			else:
+				cacheLimit=24
+			cacheData=deviceDataFile.readData(deviceId)
+			mqttClient.publish(topic,data)
 			deviceDataFile.writeDataLimit(int(data),deviceId, scaleX)
 			#更新最新时间
 			if scaleX=='day':
-				deviceInfo[deviceId]['currentTime']=now.weekday()+1
+				deviceInfo[deviceId]['currentTime']=now.weekday()
 			elif scaleX=='hour':
 				deviceInfo[deviceId]['currentTime']=now.hour
 			deviceFile.write(deviceInfo)

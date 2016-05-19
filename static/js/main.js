@@ -34,7 +34,7 @@ $(document).ready(function() {
   table.on('click', '.check-button', function(e) {
     var tmp = $(this).closest('tr');
     var items = tmp.find('td');
-    if (items.eq(3).text() != '' && items.eq(4).text().split('/')[0] != '' && items.eq(4).text().split('/')[1] != '') {
+    if (items.eq(3).text() != '' && items.eq(4).text().split('/')[1] != '') {
       window.location.assign('/check?deviceId=' + e.target.dataset.checkid);
     } else {
       alert('请补全主题和数据单位！');
