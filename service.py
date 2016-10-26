@@ -2,6 +2,7 @@
 import web
 from fileHandler import fileReader
 import json
+import paho.mqtt.client as mqtt
 
 urls=(
     '/','loginHandler',
@@ -12,6 +13,8 @@ render = web.template.render('templates/')
 
 deviceFile=fileReader('deviceInfo.txt')
 deviceDataFile=fileReader('deviceData.txt')
+mqttClient=mqtt.Client()
+mqttClient.connect('127.0.0.1')
 
 def Authenticate(func):
     def wrapper(*args,**kw):
@@ -60,6 +63,7 @@ class indexHandler:
         deviceInfo[deviceId]['topic']=topic
         deviceInfo[deviceId]['scale']=scale
         deviceFile.write(deviceInfo)
+        mqttClient.publish('change_data',json.dumps(deviceInfo))
         return render.index(deviceInfo)
 
     @Authenticate

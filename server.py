@@ -26,7 +26,22 @@ deviceFile=fileReader('deviceInfo.txt')
 deviceDataFile=fileReader('deviceData.txt')
 now=datetime.now()
 mqttClient=mqtt.Client()
+
+def on_connect(client, userdata, rc):
+    mqttClient.subscribe('post_data')
+
+def on_message(client, userdata, msg):
+	if(msg.topic=='post_data'):
+		deviceInfo=json.loads(msg.payload)
+		deviceFile.write(deviceInfo)
+		print 'hello!!'
+
+mqttClient.on_connect=on_connect
+mqttClient.on_message=on_message
 mqttClient.connect('127.0.0.1')
+t=threading.Thread(target=mqttClient.loop_forever,args=())
+t.start()
+# mqttClient.loop_forever()
 
 def tcplink(sock,addr):
     print 'accept new connection from ',addr
