@@ -21,6 +21,10 @@ class fileReader:
         with open(self.path,'w') as f:
             f.write(json.dumps(data))
 
+    def clear(self):
+        with open(self.path,'w') as f:
+            f.truncate()
+
     #读取某一行文件数据
     def readData(self,lineNum):
         with open(self.path,'r') as f:
@@ -44,10 +48,11 @@ class fileReader:
 
     #写入某一行文件数据（写入个数有限）
     def writeDataLimit(self,data,lineNum,xScale):
-        if xScale=='hour':
-            limit=24
-        elif xScale=='day':
-            limit=7
+        # if xScale=='hour':
+        #     limit=24
+        # elif xScale=='day':
+        #     limit=7
+        limit=24
         with open(self.path,'r') as f:
             lineContents=f.readlines()
             line=self.readData(lineNum)

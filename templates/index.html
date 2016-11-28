@@ -21,6 +21,7 @@ $def with (deviceInfo)
 					<th>厂商</th>
 					<th>主题</th>
 					<th>数据单位</th>
+					<th>QOS 等级</th>
 					<th class='config-operate' colspan='2'>操作</th>
 				</tr>
 
@@ -31,6 +32,7 @@ $def with (deviceInfo)
 						<td class='info-manu'>$item['deviceManufac']</td>
 						<td class='info-topic'>$item['topic']</td>
 						<td class='info-scale'>$item['scale']</td>
+						<td class='info-qos'>$item['qos']</td>
 						<td>
 						<button class='config-button'>配置</button>
 							</td>
@@ -58,6 +60,11 @@ $def with (deviceInfo)
 						<option value='hour'>hour</option>
 					</select><br/>
 					<label>数据单位(y轴):</label><input type='text' name='yscale' class='config-input'/><br/>
+					<label>QOS等级:</label><br/><select name='qos' class='config-qos'>
+						<option value=0>至多一次</option>
+						<option value=1>至少一次</option>
+						<option value=2>只有一次</option>
+					</select><br/>
 					<input type='button' value='确定' class='config-yes'/>
 					<input type='button' value='取消' class='config-no'/>
 					<input type='hidden' name='deviceId' class='config-id'/>

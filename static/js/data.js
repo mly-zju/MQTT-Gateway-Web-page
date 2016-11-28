@@ -22,6 +22,7 @@ $(document).ready(function() {
   var count = 0;
   var limit = 0;
   var timeLibIndex = 0;
+  console.log(deviceInfo.scale.split('/')[1]);
   if (deviceInfo.scale.split('/')[1] == 'hour') {
     limit = 24;
     timeLibIndex = 0;
@@ -37,6 +38,7 @@ $(document).ready(function() {
     categories.unshift(timeLib[timeLibIndex][i]);
     i--;
   }
+  console.log(categories);
   xAxis = {
     categories: categories
   }
@@ -67,7 +69,7 @@ $(document).ready(function() {
   var series = [
     {
       name: deviceInfo.deviceName,
-      data: deviceData
+      data: deviceData.slice(24-limit, 23)
     }
   ];
 

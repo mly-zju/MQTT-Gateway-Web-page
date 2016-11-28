@@ -24,7 +24,7 @@ class ListName(SGMLParser):
 nameReq=ListName()
 deviceFile=fileReader('deviceInfo.txt')
 deviceDataFile=fileReader('deviceData.txt')
-now=datetime.now()
+
 mqttClient=mqtt.Client()
 
 def on_connect(client, userdata, rc):
@@ -61,11 +61,15 @@ def tcplink(sock,addr):
         mac_string=os.popen(cmd,'r').read()
         mac_index= mac_string.index('at')
         mac_addr=mac_string[mac_index+3:mac_index+20]
-        content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/').read()
+	try:
+		content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/', data='', timeout=10).read()
+	except Exception as e:
+		content=''
+        # content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/', data='', timeout=10).read()
         nameReq.feed(content)
         deviceManufac=nameReq.name[3]
         #下面是dataInfo的数据结构
-        deviceInfo.append({'topic':'','deviceName':'','scale':'/','currentTime':'','deviceId':deviceId,'deviceIp':addr[0],'deviceMac':mac_addr,'deviceManufac':deviceManufac})
+        deviceInfo.append({'topic':'','deviceName':'','scale':'/','currentTime':'','deviceId':deviceId,'deviceIp':addr[0],'deviceMac':mac_addr,'deviceManufac':deviceManufac, 'qos':0})
         deviceFile.write(deviceInfo)
         dataLine=[]
         dataLine.append(addr[0])
@@ -75,15 +79,13 @@ def tcplink(sock,addr):
 		topic=deviceInfo[deviceId]['topic']
 		scale=deviceInfo[deviceId]['scale']
 		scaleX=scale[scale.index('/')+1:]
+		qos=deviceInfo[deviceId]['qos']
 		if scaleX!='' and topic!='':
-			if scaleX=='day':
-				cacheLimit=7
-			else:
-				cacheLimit=24
 			cacheData=deviceDataFile.readData(deviceId)
-			mqttClient.publish(topic,data)
+			mqttClient.publish(topic,data, qos=qos)
 			deviceDataFile.writeDataLimit(int(data),deviceId, scaleX)
 			#更新最新时间
+			now=datetime.now()
 			if scaleX=='day':
 				deviceInfo[deviceId]['currentTime']=now.weekday()
 			elif scaleX=='hour':

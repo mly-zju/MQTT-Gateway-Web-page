@@ -3,6 +3,7 @@ import web
 from fileHandler import fileReader
 import json
 import paho.mqtt.client as mqtt
+from datetime import datetime
 
 urls=(
     '/','loginHandler',
@@ -58,12 +59,26 @@ class indexHandler:
         xscale=info.get('xscale')
         yscale=info.get('yscale')
         scale=yscale+'/'+xscale
+        qos=info.get('qos')
         deviceInfo=deviceFile.read()
         deviceInfo[deviceId]['deviceName']=deviceName
         deviceInfo[deviceId]['topic']=topic
         deviceInfo[deviceId]['scale']=scale
+        deviceInfo[deviceId]['qos']=int(qos)
+        now=datetime.now()
+        if xscale=='hour':
+            deviceInfo[deviceId]['currentTime']=now.hour
+        elif xscale=='week':
+            deviceInfo[deviceId]['currentTime']=now.weekday()
         deviceFile.write(deviceInfo)
         mqttClient.publish('change_data',json.dumps(deviceInfo))
+        length=len(deviceInfo)
+        myDeviceData=[]
+        i=0
+        while i<length:
+            myDeviceData.append(deviceDataFile.readData(i))
+            i=i+1
+        mqttClient.publish('change_data2',json.dumps(myDeviceData))
         return render.index(deviceInfo)
 
     @Authenticate
