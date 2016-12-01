@@ -48,7 +48,7 @@ def tcplink(sock,addr):
     data=sock.recv(1024)
     flag=False
     deviceInfo=deviceFile.read()
-    deviceId=0;
+    deviceId=0
     for device in deviceInfo:
         if(addr[0]==device['deviceIp']):
             flag=True
@@ -93,7 +93,7 @@ def tcplink(sock,addr):
 			deviceFile.write(deviceInfo)
 		else:
 			deviceDataFile.writeData(int(data),deviceId)
-    sock.close()
+    return sock.close()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('127.0.0.1',9999))

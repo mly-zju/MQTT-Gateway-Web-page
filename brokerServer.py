@@ -22,11 +22,13 @@ def on_message(client, userdata, msg):
         deviceInfo=deviceFile.read()
         brokerManager.publish('post_data',json.dumps(deviceInfo))
     elif(msg.topic=="change_data"):
+        # device info change
         print 'change_data'
         deviceInfo=json.loads(msg.payload)
         deviceFile.write(deviceInfo)
         brokerManager.publish('post_data',json.dumps(deviceInfo))
     elif(msg.topic=="change_data2"):
+        # device data change
         print 'change_data2'
         myData=json.loads(msg.payload)
         deviceDataFile.clear()

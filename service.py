@@ -64,12 +64,12 @@ class indexHandler:
         deviceInfo[deviceId]['deviceName']=deviceName
         deviceInfo[deviceId]['topic']=topic
         deviceInfo[deviceId]['scale']=scale
-        deviceInfo[deviceId]['qos']=int(qos)
+        deviceInfo[deviceId]['qos']=qos
         now=datetime.now()
         if xscale=='hour':
-            deviceInfo[deviceId]['currentTime']=now.hour
+            deviceInfo[deviceId]['currentTime']=str(now.hour)
         elif xscale=='week':
-            deviceInfo[deviceId]['currentTime']=now.weekday()
+            deviceInfo[deviceId]['currentTime']=str(now.weekday())
         deviceFile.write(deviceInfo)
         mqttClient.publish('change_data',json.dumps(deviceInfo))
         length=len(deviceInfo)
