@@ -1,13 +1,14 @@
-#include <sys/types.h>
+//#include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
-#include <netinet/in.h>
+//#include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <sys/shm.h>
+// #include <fcntl.h>
+//#include <sys/shm.h>
+#include <time.h>
 
 #define MYPORT  9999
 #define BUFFER_SIZE 1024
@@ -22,7 +23,8 @@ int main()
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(MYPORT);  ///服务器端口
-    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");  ///服务器ip
+    //servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");  ///服务器ip
+    servaddr.sin_addr.s_addr = inet_addr("192.168.0.1");  ///服务器ip
 
     ///连接服务器，成功返回0，错误返回-1
     if (connect(sock_cli, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
@@ -31,22 +33,15 @@ int main()
         exit(1);
     }
 
-    // char sendbuf[BUFFER_SIZE];
-    // char recvbuf[BUFFER_SIZE];
-    // while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)
-    // {
-    //     send(sock_cli, sendbuf, strlen(sendbuf),0); ///发送
-    //     if(strcmp(sendbuf,"exit\n")==0)
-    //         break;
-    //     recv(sock_cli, recvbuf, sizeof(recvbuf),0); ///接收
-    //     fputs(recvbuf, stdout);
-    //
-    //     memset(sendbuf, 0, sizeof(sendbuf));
-    //     memset(recvbuf, 0, sizeof(recvbuf));
-    // }
-    //
-    // close(sock_cli);
-    char s[]="1222";
-    send(sock_cli,s,strlen(s),0);
+    // char s[]="1223";
+    // send(sock_cli,s,strlen(s),0);
+
+    srand(time(NULL));
+    int m=rand()%500;
+    char s[4];
+    sprintf(s,"%d", m);
+    send(sock_cli,s, strlen(s), 0);
+
+    close(sock_cli);
     return 0;
 }

@@ -34,55 +34,53 @@ def on_message(client, userdata, msg):
 	if(msg.topic=='post_data'):
 		deviceInfo=json.loads(msg.payload)
 		deviceFile.write(deviceInfo)
-		print 'received new device info from broker!'
+		print 'hello!!'
 
 mqttClient.on_connect=on_connect
 mqttClient.on_message=on_message
 mqttClient.connect('127.0.0.1')
 t=threading.Thread(target=mqttClient.loop_forever,args=())
 t.start()
+# mqttClient.loop_forever()
 
-def tcplink(sock, addr):
+def tcplink(sock,addr):
     print 'accept new connection from ',addr
     data=sock.recv(1024)
     flag=False
-    print data
     deviceInfo=deviceFile.read()
     deviceId=0
     for device in deviceInfo:
-        if addr[0]==device['deviceIp']:
+        if(addr[0]==device['deviceIp']):
             flag=True
-            deviceId=int(device['deviceId'])
+            deviceId=device['deviceId']
             break
+    #如果设备是全新的，尚未记录到文件中：
     if not flag:
         deviceId=len(deviceInfo)
         cmd='arp -a '+'192.168.1.1'  #这条命令仅仅作测试用，实际部署应该改为addr[0]
         mac_string=os.popen(cmd,'r').read()
         mac_index= mac_string.index('at')
         mac_addr=mac_string[mac_index+3:mac_index+20]
-        try:
-            content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/', data='', timeout=10).read()
-            nameReq.feed(content)
-            deviceManufac=nameReq.name[3]
-        except Exception as e:
-            content=""
-            deviceManufac=""
-        # nameReq.feed(content)
-        # deviceManufac=nameReq.name[3]
+		# try:
+		# 	content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/', data='', timeout=10).read()
+		# except Exception as e:
+		# 	content=''
+        # content=urllib2.urlopen('http://mac.51240.com/'+mac_addr+'__mac/', data='', timeout=10).read()
+        nameReq.feed(content)
+        deviceManufac=nameReq.name[3]
         #下面是dataInfo的数据结构
         deviceInfo.append({'topic':'','deviceName':'','scale':'/','currentTime':'','deviceId':deviceId,'deviceIp':addr[0],'deviceMac':mac_addr,'deviceManufac':deviceManufac, 'qos':0})
         deviceFile.write(deviceInfo)
-        mqttClient.publish('change_data',json.dumps(deviceInfo))
         dataLine=[]
         dataLine.append(addr[0])
         dataLine.append(int(data))
         deviceDataFile.addData(dataLine)
     else:
-        topic=deviceInfo[deviceId]['topic']
-        scale=deviceInfo[deviceId]['scale']
-        scaleX=scale[scale.index('/')+1:]
-        qos=int(deviceInfo[deviceId]['qos'])
-        if scaleX!='' and topic!='':
+		topic=deviceInfo[deviceId]['topic']
+		scale=deviceInfo[deviceId]['scale']
+		scaleX=scale[scale.index('/')+1:]
+		qos=deviceInfo[deviceId]['qos']
+		if scaleX!='' and topic!='':
 			cacheData=deviceDataFile.readData(deviceId)
 			mqttClient.publish(topic,data, qos=qos)
 			deviceDataFile.writeDataLimit(int(data),deviceId, scaleX)
@@ -93,15 +91,8 @@ def tcplink(sock, addr):
 			elif scaleX=='hour':
 				deviceInfo[deviceId]['currentTime']=now.hour
 			deviceFile.write(deviceInfo)
-        else:
-            deviceDataFile.writeData(int(data),deviceId)
-    length=len(deviceInfo)
-    myDeviceData=[]
-    i=0
-    while i<length:
-        myDeviceData.append(deviceDataFile.readData(i))
-        i=i+1
-    mqttClient.publish('change_data2',json.dumps(myDeviceData))
+		else:
+			deviceDataFile.writeData(int(data),deviceId)
     return sock.close()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

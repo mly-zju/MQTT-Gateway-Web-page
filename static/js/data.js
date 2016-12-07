@@ -30,7 +30,7 @@ $(document).ready(function() {
     limit = 7;
     timeLibIndex = 1;
   }
-  for (var i = deviceInfo.currentTime; i >= 0; i--) {
+  for (var i = parseInt(deviceInfo.currentTime); i >= 0; i--) {
     categories.unshift(timeLib[timeLibIndex][i]);
     count++;
   }
@@ -69,7 +69,7 @@ $(document).ready(function() {
   var series = [
     {
       name: deviceInfo.deviceName,
-      data: deviceData.slice(24-limit, 23)
+      data: deviceData.slice(24-limit)
     }
   ];
 

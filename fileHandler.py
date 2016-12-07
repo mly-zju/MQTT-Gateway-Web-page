@@ -37,6 +37,7 @@ class fileReader:
     def writeData(self,data,lineNum):
         with open(self.path,'r') as f:
             lineContents=f.readlines()
+            maxLine=len(lineContents)
             line=self.readData(lineNum)
             line.append(data)
             lineContents[lineNum]=json.dumps(line)+'\n'

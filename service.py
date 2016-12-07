@@ -66,19 +66,20 @@ class indexHandler:
         deviceInfo[deviceId]['scale']=scale
         deviceInfo[deviceId]['qos']=qos
         now=datetime.now()
+        print xscale
         if xscale=='hour':
             deviceInfo[deviceId]['currentTime']=str(now.hour)
-        elif xscale=='week':
+        elif xscale=='day':
             deviceInfo[deviceId]['currentTime']=str(now.weekday())
         deviceFile.write(deviceInfo)
         mqttClient.publish('change_data',json.dumps(deviceInfo))
-        length=len(deviceInfo)
-        myDeviceData=[]
-        i=0
-        while i<length:
-            myDeviceData.append(deviceDataFile.readData(i))
-            i=i+1
-        mqttClient.publish('change_data2',json.dumps(myDeviceData))
+        # length=len(deviceInfo)
+        # myDeviceData=[]
+        # i=0
+        # while i<length:
+        #     myDeviceData.append(deviceDataFile.readData(i))
+        #     i=i+1
+        # mqttClient.publish('change_data2',json.dumps(myDeviceData))
         return render.index(deviceInfo)
 
     @Authenticate

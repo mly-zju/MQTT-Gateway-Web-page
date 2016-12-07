@@ -3,7 +3,7 @@ import json
 import os
 from datetime import datetime
 import paho.mqtt.client as mqtt
-from fileHandler import fileReader
+from fileHandler import fileReader    
 
 brokerManager=mqtt.Client()
 deviceFile=fileReader('deviceInfoServer.txt')
@@ -23,7 +23,7 @@ def on_message(client, userdata, msg):
         brokerManager.publish('post_data',json.dumps(deviceInfo))
     elif(msg.topic=="change_data"):
         # device info change
-        print 'change_data'
+        print 'change_data!!!!!!'
         deviceInfo=json.loads(msg.payload)
         deviceFile.write(deviceInfo)
         brokerManager.publish('post_data',json.dumps(deviceInfo))
